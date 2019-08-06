@@ -2,7 +2,7 @@
   "name": "back_end_personal_management",
   "version": "1.0.0",
   "description": "",
-  "main": "index.js",
+  "main": "server/server.js",
   "scripts": {
     "dev": "npx nodemon server/server.js -w server"
   },
