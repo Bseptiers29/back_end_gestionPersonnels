@@ -13,6 +13,20 @@ Personal.allPersonals = () => {
   });
 };
 
+Personal.joint = () => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      `SELECT * FROM personnel,conges where personnel.IDConges = conges.IDConges`,
+      (err, res) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(res);
+      }
+    );
+  });
+};
+
 Personal.onePersonal = id => {
   return new Promise((resolve, reject) => {
     conn.query(`SELECT * FROM personnel where id = ?`, [id], (err, res) => {

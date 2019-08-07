@@ -4,7 +4,7 @@ const db = require("../db/personal");
 //Routes pour la table "personnel"
 
 //Route pour toutes les données
-routerPersonal.get("/personnel", async (req, res, next) => {
+routerPersonal.get("/personnel", async (req, res) => {
   try {
     let results = await db.allPersonals();
     res.json(results);
@@ -14,8 +14,18 @@ routerPersonal.get("/personnel", async (req, res, next) => {
   }
 });
 
+routerPersonal.get("/personnels", async (req, res) => {
+  try {
+    let results = await db.joint();
+    res.json(results);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 //Route pour un seul personnel
-routerPersonal.get("/personnel/:id", async (req, res, next) => {
+routerPersonal.get("/personnel/:id", async (req, res) => {
   try {
     let results = await db.onePersonal(req.params.id);
     res.json(results);
