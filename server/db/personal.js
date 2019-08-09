@@ -75,6 +75,19 @@ Personal.updatePersonal = (personnel, id) => {
   });
 };
 
+Personal.updateConges = (personnel, id) => {
+  return new Promise((resolve, reject) => {
+    const params = [personnel.debutconges, personnel.finconges, id];
+    const query = `UPDATE personnel SET debutconges = ?, finconges = ? WHERE id = ?`;
+    conn.query(query, params, (err, res) => {
+      if (err) {
+        return reject(err);
+      }
+      return resolve(res);
+    });
+  });
+};
+
 Personal.deletePersonal = id => {
   return new Promise((resolve, reject) => {
     conn.query(`DELETE FROM personnel where id = ?`, [id], (err, res) => {

@@ -59,6 +59,18 @@ routerPersonal.put("/personnel/:id", async (req, res) => {
   }
 });
 
+//Route pour mettre a jour un personnel
+routerPersonal.put("/conges/:id", async (req, res) => {
+  try {
+    const personal = req.body;
+    let results = await db.updateConges(personal, req.params.id);
+    res.json(results);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 //Route pour supprimer un personnel
 routerPersonal.delete("/personnel/:id", async (req, res) => {
   try {
