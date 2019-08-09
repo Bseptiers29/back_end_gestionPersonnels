@@ -65,7 +65,7 @@ Personal.updatePersonal = (personnel, id) => {
       personnel.finconges,
       id
     ];
-    const query = `UPDATE personnel SET prenom = ?, nom = ?, anciennete = ?, email = ?, profession = ?, service = ?, image = ?, date_naissance = ? , congesdispo = ? , debutconges = ? , finconges = ? , WHERE id = ?`;
+    const query = `UPDATE personnel SET prenom = ?, nom = ?, anciennete = ?, email = ?, profession = ?, service = ?, image = ?, date_naissance = ?, congesdispo = ?, debutconges = ?, finconges = ? WHERE id = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);

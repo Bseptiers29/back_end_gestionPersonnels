@@ -13,7 +13,7 @@ app.use("/v1", routes);
 
 app.get("/", function(req, res) {
   res.send(
-    "Bienvenu sur l'API de l'outil de gestion de personnels SOCOMORE, vous trouverez vos ressources a ces url :<br/><br/> - Personnels : /v1/personnel <br /> - Conges : /v1/conges"
+    "Bienvenu sur l'API de l'outil de gestion de personnels SOCOMORE, vous trouverez vos ressources a ces url :<br/><br/> - Personnels : /v1/personnel"
   );
 });
 
