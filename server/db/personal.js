@@ -13,20 +13,6 @@ Personal.allPersonals = () => {
   });
 };
 
-Personal.joint = () => {
-  return new Promise((resolve, reject) => {
-    conn.query(
-      `SELECT * FROM personnel,conges where personnel.IDConges = conges.IDConges`,
-      (err, res) => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(res);
-      }
-    );
-  });
-};
-
 Personal.onePersonal = id => {
   return new Promise((resolve, reject) => {
     conn.query(`SELECT * FROM personnel where id = ?`, [id], (err, res) => {
@@ -48,9 +34,12 @@ Personal.postPersonal = personnel => {
       personnel.profession,
       personnel.service,
       personnel.image,
-      personnel.date_naissance
+      personnel.date_naissance,
+      personnel.congesdispo,
+      personnel.debutconges,
+      personnel.finconges
     ];
-    const query = `INSERT INTO personnel (prenom, nom, anciennete, email, profession, service, image, date_naissance) VALUES (?, ?, ?, ?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO personnel (prenom, nom, anciennete, email, profession, service, image, date_naissance, congesdispo, debutconges, finconges) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -71,9 +60,12 @@ Personal.updatePersonal = (personnel, id) => {
       personnel.service,
       personnel.image,
       personnel.date_naissance,
+      personnel.congesdispo,
+      personnel.debutconges,
+      personnel.finconges,
       id
     ];
-    const query = `UPDATE personnel SET prenom = ?, nom = ?, anciennete = ?, email = ?, profession = ?, service = ?, image = ?, date_naissance = ? WHERE id = ?`;
+    const query = `UPDATE personnel SET prenom = ?, nom = ?, anciennete = ?, email = ?, profession = ?, service = ?, image = ?, date_naissance = ? , congesdispo = ? , debutconges = ? , finconges = ? , WHERE id = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
