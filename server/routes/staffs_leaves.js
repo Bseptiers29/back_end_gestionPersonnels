@@ -25,18 +25,21 @@ routerStaffsLeaves.post("/personnels_conges", async (req, res) => {
 });
 
 //Route for delete one Staff
-routerStaffsLeaves.delete("/personnels/:ID_PERSONNEL", async (req, res) => {
-  try {
-    let results = await db.deleteStaffLeave(req.params.ID_PERSONNEL);
-    res.json(results);
-  } catch (e) {
-    console.log(e);
-    res.sendStatus(500);
+routerStaffsLeaves.delete(
+  "/personnels_conges/:ID_PERSONNEL",
+  async (req, res) => {
+    try {
+      let results = await db.deleteStaffLeave(req.params.ID_PERSONNEL);
+      res.json(results);
+    } catch (e) {
+      console.log(e);
+      res.sendStatus(500);
+    }
   }
-});
+);
 
 //Route for delete one Staff
-routerStaffsLeaves.delete("/personnels/:ID_CONGES", async (req, res) => {
+routerStaffsLeaves.delete("/personnels_conges/:ID_CONGES", async (req, res) => {
   try {
     let results = await db.deleteLeaveStaff(req.params.ID_CONGES);
     res.json(results);

@@ -82,7 +82,7 @@ Staff.updateStaff = (PERSONNEL, ID) => {
 //DELETE one Staff
 Staff.deleteStaff = ID => {
   return new Promise((resolve, reject) => {
-    conn.query(`DELETE FROM PERSONNEL WHERE ID = ?;`, [ID], (err, res) => {
+    conn.query(`DELETE FROM PERSONNEL WHERE ID = ?`, [ID], (err, res) => {
       if (err) {
         return reject(err);
       }

@@ -44,7 +44,7 @@ Leaves.postLeave = CONGES => {
 Leaves.updateLeave = (CONGES, IDC) => {
   return new Promise((resolve, reject) => {
     const params = [CONGES.NBCONGES, CONGES.DEBUTCONGES, CONGES.FINCONGES, IDC];
-    const query = `UPDATE CONGES SET NBCONGES = ?, DEBUTCONGES = ?, FINCONGES = ? WHERE IDC = ?;`;
+    const query = `UPDATE CONGES SET NBCONGES = ?, DEBUTCONGES = ?, FINCONGES = ? WHERE IDC = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
