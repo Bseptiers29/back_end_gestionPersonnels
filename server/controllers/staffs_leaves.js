@@ -6,7 +6,7 @@ let StaffLeaves = {};
 StaffLeaves.allStaffsLeaves = () => {
   return new Promise((resolve, reject) => {
     conn.query(
-      `SELECT * FROM PERSONNEL, CONGES, PERSONNEL_CONGES WHERE PERSONNEL.ID = PERSONNEL_CONGES.ID_PERSONNEL AND CONGES.ID = PERSONNEL_CONGES.ID_CONGES ORDER BY PERSONNEL.NOM;`,
+      `SELECT * FROM PERSONNEL, CONGES, PERSONNEL_CONGES WHERE PERSONNEL.ID = PERSONNEL_CONGES.ID_PERSONNEL AND CONGES.IDC = PERSONNEL_CONGES.ID_CONGES ORDER BY PERSONNEL.NOM;`,
       (err, res) => {
         if (err) {
           return reject(err);
