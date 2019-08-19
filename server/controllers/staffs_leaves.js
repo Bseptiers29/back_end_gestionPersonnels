@@ -6,7 +6,7 @@ let StaffLeaves = {};
 StaffLeaves.allStaffsLeaves = () => {
   return new Promise((resolve, reject) => {
     conn.query(
-      `SELECT * FROM PERSONNEL, CONGES, PERSONNEL_CONGES WHERE PERSONNEL.ID = PERSONNEL_CONGES.ID_PERSONNEL AND CONGES.IDC = PERSONNEL_CONGES.ID_CONGES ORDER BY PERSONNEL.NOM`,
+      `SELECT * FROM Personnel, Conges, Personnel_Conges WHERE PERSONNEL.ID = PERSONNEL_CONGES.ID_PERSONNEL AND CONGES.IDC = PERSONNEL_CONGES.ID_CONGES ORDER BY PERSONNEL.NOM`,
       (err, res) => {
         if (err) {
           return reject(err);
@@ -18,15 +18,15 @@ StaffLeaves.allStaffsLeaves = () => {
 };
 
 //POST Staff_Leaves
-StaffLeaves.postStaffLeaves = (PERSONNEL, CONGES, PERSONNEL_CONGES) => {
+StaffLeaves.postStaffLeaves = (Personnel, Conges, Personnel_Conges) => {
   return new Promise((resolve, reject) => {
     const params = [
-      CONGES.IDC,
-      PERSONNEL.ID,
-      PERSONNEL_CONGES.ID_PERSONNEL,
-      PERSONNEL_CONGES.ID_CONGES
+      Conges.IDC,
+      Personnel.ID,
+      Personnel_Conges.ID_PERSONNEL,
+      Personnel_Conges.ID_CONGES
     ];
-    const query = `INSERT INTO PERSONNEL_CONGES (ID_PERSONNEL, ID_CONGES) SELECT ID, IDC FROM PERSONNEL, CONGES WHERE ID = ? AND IDC = ?`;
+    const query = `INSERT INTO Personnel_Conges (ID_PERSONNEL, ID_CONGES) SELECT ID, IDC FROM Personnel, Conges WHERE ID = ? AND IDC = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);

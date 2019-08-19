@@ -5,7 +5,7 @@ let Staff = {};
 //GET all Staffs
 Staff.allStaffs = () => {
   return new Promise((resolve, reject) => {
-    conn.query(`SELECT * FROM PERSONNEL ORDER BY NOM`, (err, res) => {
+    conn.query(`SELECT * FROM Personnel ORDER BY NOM`, (err, res) => {
       if (err) {
         return reject(err);
       }
@@ -17,7 +17,7 @@ Staff.allStaffs = () => {
 //GET one Staff
 Staff.oneStaff = ID => {
   return new Promise((resolve, reject) => {
-    conn.query(`SELECT * FROM PERSONNEL WHERE ID = ?`, [ID], (err, res) => {
+    conn.query(`SELECT * FROM Personnel WHERE ID = ?`, [ID], (err, res) => {
       if (err) {
         return reject(err);
       }
@@ -42,7 +42,7 @@ Staff.postStaff = Personnel => {
       Personnel.Service,
       Personnel.Image
     ];
-    const query = `INSERT INTO PERSONNEL (Prenom, Nom, Securitesociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, Image) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )`;
+    const query = `INSERT INTO Personnel (Prenom, Nom, Securitesociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, Image) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -69,7 +69,7 @@ Staff.updateStaff = (Personnel, ID) => {
       Personnel.Image,
       ID
     ];
-    const query = `UPDATE PERSONNEL SET Prenom = ?, Nom = ?, Securitesociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, Image = ? WHERE ID = ?`;
+    const query = `UPDATE Personnel SET Prenom = ?, Nom = ?, Securitesociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, Image = ? WHERE ID = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -82,7 +82,7 @@ Staff.updateStaff = (Personnel, ID) => {
 //DELETE one Staff
 Staff.deleteStaff = ID => {
   return new Promise((resolve, reject) => {
-    conn.query(`DELETE FROM PERSONNEL WHERE ID = ?`, [ID], (err, res) => {
+    conn.query(`DELETE FROM Personnel WHERE ID = ?`, [ID], (err, res) => {
       if (err) {
         return reject(err);
       }
