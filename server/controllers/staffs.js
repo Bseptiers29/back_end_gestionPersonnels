@@ -27,20 +27,20 @@ Staff.oneStaff = ID => {
 };
 
 //POST new Staff
-Staff.postStaff = PERSONNEL => {
+Staff.postStaff = Personnel => {
   return new Promise((resolve, reject) => {
     const params = [
-      PERSONNEL.Prenom,
-      PERSONNEL.Nom,
-      PERSONNEL.Securitesociale,
-      PERSONNEL.Anciennete,
-      PERSONNEL.Date_naissance,
-      PERSONNEL.Email,
-      PERSONNEL.Adresse,
-      PERSONNEL.Telephone,
-      PERSONNEL.Profession,
-      PERSONNEL.Service,
-      PERSONNEL.Image
+      Personnel.Prenom,
+      Personnel.Nom,
+      Personnel.Securitesociale,
+      Personnel.Anciennete,
+      Personnel.Date_naissance,
+      Personnel.Email,
+      Personnel.Adresse,
+      Personnel.Telephone,
+      Personnel.Profession,
+      Personnel.Service,
+      Personnel.Image
     ];
     const query = `INSERT INTO PERSONNEL (Prenom, Nom, Securitesociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, Image) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )`;
     conn.query(query, params, (err, res) => {
@@ -53,20 +53,20 @@ Staff.postStaff = PERSONNEL => {
 };
 
 //UPDATE one Staff
-Staff.updateStaff = (PERSONNEL, ID) => {
+Staff.updateStaff = (Personnel, ID) => {
   return new Promise((resolve, reject) => {
     const params = [
-      PERSONNEL.Prenom,
-      PERSONNEL.Nom,
-      PERSONNEL.Securitesociale,
-      PERSONNEL.Anciennete,
-      PERSONNEL.Date_naissance,
-      PERSONNEL.Email,
-      PERSONNEL.Adresse,
-      PERSONNEL.Telephone,
-      PERSONNEL.Profession,
-      PERSONNEL.Service,
-      PERSONNEL.Image,
+      Personnel.Prenom,
+      Personnel.Nom,
+      Personnel.Securitesociale,
+      Personnel.Anciennete,
+      Personnel.Date_naissance,
+      Personnel.Email,
+      Personnel.Adresse,
+      Personnel.Telephone,
+      Personnel.Profession,
+      Personnel.Service,
+      Personnel.Image,
       ID
     ];
     const query = `UPDATE PERSONNEL SET Prenom = ?, Nom = ?, Securitesociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, Image = ? WHERE ID = ?`;

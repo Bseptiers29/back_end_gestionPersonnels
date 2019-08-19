@@ -27,9 +27,9 @@ Leaves.oneLeave = IDC => {
 };
 
 //POST new Leave
-Leaves.postLeave = CONGES => {
+Leaves.postLeave = Conges => {
   return new Promise((resolve, reject) => {
-    const params = [CONGES.Nbconges, CONGES.Debutconges, CONGES.Finconges];
+    const params = [Conges.Nbconges, Conges.Debutconges, Conges.Finconges];
     const query = `INSERT INTO CONGES (Nbconges, Debutconges, Finconges) VALUES ( ?, ?, ?)`;
     conn.query(query, params, (err, res) => {
       if (err) {
@@ -41,9 +41,9 @@ Leaves.postLeave = CONGES => {
 };
 
 //UPDATE one Leave
-Leaves.updateLeave = (CONGES, IDC) => {
+Leaves.updateLeave = (Conges, IDC) => {
   return new Promise((resolve, reject) => {
-    const params = [CONGES.Nbconges, CONGES.Debutconges, CONGES.Finconges, IDC];
+    const params = [Conges.Nbconges, Conges.Debutconges, Conges.Finconges, IDC];
     const query = `UPDATE CONGES SET Nbconges = ?, Debutconges = ?, Finconges = ? WHERE IDC = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
