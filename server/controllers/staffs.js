@@ -43,12 +43,12 @@ Staff.postStaff = Personnel => {
       Personnel.Image
     ];
     const query =
-      "INSERT INTO Personnel VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
-    conn.query(query, params, (err, res) => {
+      "INSERT INTO Personnel (Prenom, Nom, Securitesociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, Image) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
+    conn.query(query, [params], (err, res) => {
       if (err) {
         return reject(err);
       }
-      return resolve(res);
+      resolve(res);
     });
   });
 };
