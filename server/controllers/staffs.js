@@ -30,19 +30,19 @@ Staff.oneStaff = ID => {
 Staff.postStaff = PERSONNEL => {
   return new Promise((resolve, reject) => {
     const params = [
-      PERSONNEL.PRENOM,
-      PERSONNEL.NOM,
-      PERSONNEL.SECURITESOCIALE,
-      PERSONNEL.ANCIENNETE,
-      PERSONNEL.DATE_NAISSANCE,
-      PERSONNEL.EMAIL,
-      PERSONNEL.ADRESSE,
-      PERSONNEL.TELEPHONE,
-      PERSONNEL.PROFESSION,
-      PERSONNEL.SERVICE,
-      PERSONNEL.IMAGE
+      PERSONNEL.Prenom,
+      PERSONNEL.Nom,
+      PERSONNEL.Securitesociale,
+      PERSONNEL.Anciennete,
+      PERSONNEL.Date_naissance,
+      PERSONNEL.Email,
+      PERSONNEL.Adresse,
+      PERSONNEL.Telephone,
+      PERSONNEL.Profession,
+      PERSONNEL.Service,
+      PERSONNEL.Image
     ];
-    const query = `INSERT INTO PERSONNEL (PRENOM, NOM, SECURITESOCIALE, ANCIENNETE, DATE_NAISSANCE, EMAIL, ADRESSE, TELEPHONE, PROFESSION, SERVICE, IMAGE) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )`;
+    const query = `INSERT INTO PERSONNEL (Prenom, Nom, Securitesociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, Image) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -56,20 +56,20 @@ Staff.postStaff = PERSONNEL => {
 Staff.updateStaff = (PERSONNEL, ID) => {
   return new Promise((resolve, reject) => {
     const params = [
-      PERSONNEL.PRENOM,
-      PERSONNEL.NOM,
-      PERSONNEL.SECURITESOCIALE,
-      PERSONNEL.ANCIENNETE,
-      PERSONNEL.DATE_NAISSANCE,
-      PERSONNEL.EMAIL,
-      PERSONNEL.ADRESSE,
-      PERSONNEL.TELEPHONE,
-      PERSONNEL.PROFESSION,
-      PERSONNEL.SERVICE,
-      PERSONNEL.IMAGE,
+      PERSONNEL.Prenom,
+      PERSONNEL.Nom,
+      PERSONNEL.Securitesociale,
+      PERSONNEL.Anciennete,
+      PERSONNEL.Date_naissance,
+      PERSONNEL.Email,
+      PERSONNEL.Adresse,
+      PERSONNEL.Telephone,
+      PERSONNEL.Profession,
+      PERSONNEL.Service,
+      PERSONNEL.Image,
       ID
     ];
-    const query = `UPDATE PERSONNEL SET PRENOM = ?, NOM = ?, SECURITESOCIALE = ?, ANCIENNETE = ?, DATE_NAISSANCE = ?, EMAIL = ?, ADRESSE = ?, TELEPHONE = ?, PROFESSION = ?, SERVICE = ?, IMAGE = ? WHERE ID = ?`;
+    const query = `UPDATE PERSONNEL SET Prenom = ?, Nom = ?, Securitesociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, Image = ? WHERE ID = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
