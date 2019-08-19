@@ -43,7 +43,7 @@ Staff.postStaff = Personnel => {
       Personnel.Image
     ];
     const query =
-      "INSERT INTO `Personnel` (`Prenom`, `Nom`, `Securitesociale`, `Anciennete`, `Date_naissance`, `Email`, `Adresse`, `Telephone`, `Profession`, `Service`, `Image`) VALUES ( `?`, `?`, `?`, `?`, `?`, `?`, `?`, `?`, `?`, `?`, `?` )";
+      "INSERT INTO Personnel VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )";
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
