@@ -6,7 +6,7 @@ let StaffLeaves = {};
 StaffLeaves.allStaffsLeaves = () => {
   return new Promise((resolve, reject) => {
     conn.query(
-      `SELECT * FROM Personnel, Conges, Personnel_Conges WHERE PERSONNEL.ID = PERSONNEL_CONGES.ID_PERSONNEL AND CONGES.IDC = PERSONNEL_CONGES.ID_CONGES ORDER BY PERSONNEL.NOM`,
+      `SELECT * FROM Personnel, Conges, Personnel_Conges WHERE Personnel.ID = Personnel_Conges.ID_PERSONNEL AND Conges.IDC = Personnel_Conges.ID_CONGES ORDER BY Personnel.Nom`,
       (err, res) => {
         if (err) {
           return reject(err);
@@ -40,7 +40,7 @@ StaffLeaves.postStaffLeaves = (Personnel, Conges, Personnel_Conges) => {
 StaffLeaves.deleteStaffLeave = ID_PERSONNEL => {
   return new Promise((resolve, reject) => {
     conn.query(
-      `DELETE FROM PERSONNEL_CONGES WHERE ID_PERSONNEL = ?`,
+      `DELETE FROM Personnel_Conges WHERE ID_PERSONNEL = ?`,
       [ID_PERSONNEL],
       (err, res) => {
         if (err) {
@@ -56,7 +56,7 @@ StaffLeaves.deleteStaffLeave = ID_PERSONNEL => {
 StaffLeaves.deleteLeaveStaff = ID_CONGES => {
   return new Promise((resolve, reject) => {
     conn.query(
-      `DELETE FROM PERSONNEL_CONGES WHERE ID_CONGES = ?`,
+      `DELETE FROM Personnel_Conges WHERE ID_CONGES = ?`,
       [ID_CONGES],
       (err, res) => {
         if (err) {
