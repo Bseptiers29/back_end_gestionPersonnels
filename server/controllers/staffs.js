@@ -5,7 +5,7 @@ let Staff = {};
 //GET all Staffs
 Staff.allStaffs = () => {
   return new Promise((resolve, reject) => {
-    conn.query(`SELECT * FROM Personnel ORDER BY Nom`, (err, res) => {
+    conn.query(`SELECT * FROM PERSONNEL ORDER BY NOM`, (err, res) => {
       if (err) {
         return reject(err);
       }
@@ -15,9 +15,9 @@ Staff.allStaffs = () => {
 };
 
 //GET one Staff
-Staff.oneStaff = Id => {
+Staff.oneStaff = ID => {
   return new Promise((resolve, reject) => {
-    conn.query(`SELECT * FROM Personnel WHERE Id = ?`, [Id], (err, res) => {
+    conn.query(`SELECT * FROM PERSONNEL WHERE ID = ?`, [ID], (err, res) => {
       if (err) {
         return reject(err);
       }
@@ -27,22 +27,22 @@ Staff.oneStaff = Id => {
 };
 
 //POST new Staff
-Staff.postStaff = Personnel => {
+Staff.postStaff = PERSONNEL => {
   return new Promise((resolve, reject) => {
     const params = [
-      Personnel.Prenom,
-      Personnel.Nom,
-      Personnel.SecuriteSociale,
-      Personnel.Anciennete,
-      Personnel.Date_naissance,
-      Personnel.Email,
-      Personnel.Adresse,
-      Personnel.Telephone,
-      Personnel.Profession,
-      Personnel.Service,
-      Personnel.Image
+      PERSONNEL.PRENOM,
+      PERSONNEL.NOM,
+      PERSONNEL.SECURITESOCIALE,
+      PERSONNEL.ANCIENNETE,
+      PERSONNEL.DATE_NAISSANCE,
+      PERSONNEL.EMAIL,
+      PERSONNEL.ADRESSE,
+      PERSONNEL.TELEPHONE,
+      PERSONNEL.PROFESSION,
+      PERSONNEL.SERVICE,
+      PERSONNEL.IMAGE
     ];
-    const query = `INSERT INTO Personnel (Prenom, Nom, SecuriteSociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, Image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO Personnel (PRENOM, NOM, SECURITESOCIALE, ANCIENNETE, DATE_NAISSANCE, EMAIL, ADRESSE, TELEPHONE, PROFESSION, SERVICE, IMAGE) VALUES ( ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ? )`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -53,37 +53,23 @@ Staff.postStaff = Personnel => {
 };
 
 //UPDATE one Staff
-Staff.updateStaff = (Personnel, Id) => {
+Staff.updateStaff = (PERSONNEL, ID) => {
   return new Promise((resolve, reject) => {
     const params = [
-      Personnel.Prenom,
-      Personnel.Nom,
-      Personnel.SecuriteSociale,
-      Personnel.Anciennete,
-      Personnel.Date_naissance,
-      Personnel.Email,
-      Personnel.Adresse,
-      Personnel.Telephone,
-      Personnel.Profession,
-      Personnel.Service,
-      Personnel.Image,
-      Id
+      PERSONNEL.PRENOM,
+      PERSONNEL.NOM,
+      PERSONNEL.SECURITESOCIALE,
+      PERSONNEL.ANCIENNETE,
+      PERSONNEL.DATE_NAISSANCE,
+      PERSONNEL.EMAIL,
+      PERSONNEL.ADRESSE,
+      PERSONNEL.TELEPHONE,
+      PERSONNEL.PROFESSION,
+      PERSONNEL.SERVICE,
+      PERSONNEL.IMAGE,
+      ID
     ];
-    const query = `UPDATE Personnel SET Prenom = ?, Nom = ?, SecuriteSociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, Image = ? WHERE Id = ?`;
-    conn.query(query, params, (err, res) => {
-      if (err) {
-        return reject(err);
-      }
-      return resolve(res);
-    });
-  });
-};
-
-//Create the link between "Personnel" & "Conges"
-Staff.updateLink = (Conges, Personnel, Id) => {
-  return new Promise((resolve, reject) => {
-    const params = [Conges.Idc, Personnel.Id_Conges, Id];
-    const query = `UPDATE Personnel, Conges SET Personnel.Id_Conges = Conges.Idc WHERE Id = ? AND Conges.Idc = ?`;
+    const query = `UPDATE PERSONNEL SET PRENOM = ?, NOM = ?, SECURITESOCIALE = ?, ANCIENNETE = ?, DATE_NAISSANCE = ?, EMAIL = ?, ADRESSE = ?, TELEPHONE = ?, PROFESSION = ?, SERVICE = ?, IMAGE = ? WHERE ID = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -94,9 +80,9 @@ Staff.updateLink = (Conges, Personnel, Id) => {
 };
 
 //DELETE one Staff
-Staff.deleteStaff = Id => {
+Staff.deleteStaff = ID => {
   return new Promise((resolve, reject) => {
-    conn.query(`DELETE FROM Personnel WHERE Id = ?`, [Id], (err, res) => {
+    conn.query(`DELETE FROM PERSONNEL WHERE ID = ?;`, [ID], (err, res) => {
       if (err) {
         return reject(err);
       }

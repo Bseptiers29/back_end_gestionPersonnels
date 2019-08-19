@@ -15,9 +15,9 @@ routerStaffs.get("/personnels", async (req, res) => {
 });
 
 //Route for one Staff
-routerStaffs.get("/personnels/:Id", async (req, res) => {
+routerStaffs.get("/personnels/:ID", async (req, res) => {
   try {
-    let results = await db.oneStaff(req.params.Id);
+    let results = await db.oneStaff(req.params.ID);
     res.json(results);
   } catch (e) {
     console.log(e);
@@ -38,26 +38,11 @@ routerStaffs.post("/personnels", async (req, res) => {
 });
 
 //Route for update one Staff
-routerStaffs.put("/personnels/:Id", async (req, res) => {
+routerStaffs.put("/personnels/:ID", async (req, res) => {
   try {
     const staff = req.body;
-    let results = await db.updateStaff(staff, req.params.Id);
+    let results = await db.updateStaff(staff, req.params.ID);
     res.json(results);
-  } catch (e) {
-    console.log(e);
-    res.sendStatus(500);
-  }
-});
-
-//Route for create link
-routerStaffs.put("/link/:Id", async (req, res) => {
-  try {
-    const staff = req.body;
-    console.log(req.body);
-    let results = await db.updateLink(staff, req.params.Id, req.params.Idc);
-    /* console.log(Idc, Id); */
-    res.json(results);
-    /* console.log(res); */
   } catch (e) {
     console.log(e);
     res.sendStatus(500);
@@ -65,9 +50,9 @@ routerStaffs.put("/link/:Id", async (req, res) => {
 });
 
 //Route for delete one Staff
-routerStaffs.delete("/personnels/:Id", async (req, res) => {
+routerStaffs.delete("/personnels/:ID", async (req, res) => {
   try {
-    let results = await db.deleteStaff(req.params.Id);
+    let results = await db.deleteStaff(req.params.ID);
     res.json(results);
   } catch (e) {
     console.log(e);

@@ -5,7 +5,7 @@ let Leaves = {};
 //GET all Leaves
 Leaves.allLeaves = () => {
   return new Promise((resolve, reject) => {
-    conn.query(`SELECT * FROM Conges`, (err, res) => {
+    conn.query(`SELECT * FROM CONGES`, (err, res) => {
       if (err) {
         return reject(err);
       }
@@ -15,9 +15,9 @@ Leaves.allLeaves = () => {
 };
 
 //GET one Leave
-Leaves.oneLeave = Id => {
+Leaves.oneLeave = IDC => {
   return new Promise((resolve, reject) => {
-    conn.query(`SELECT * FROM Conges WHERE Id = ?`, [Id], (err, res) => {
+    conn.query(`SELECT * FROM CONGES WHERE IDC = ?`, [IDC], (err, res) => {
       if (err) {
         return reject(err);
       }
@@ -27,10 +27,10 @@ Leaves.oneLeave = Id => {
 };
 
 //POST new Leave
-Leaves.postLeave = Conges => {
+Leaves.postLeave = CONGES => {
   return new Promise((resolve, reject) => {
-    const params = [Conges.CongesDispo, Conges.DebutConges, Conges.FinConges];
-    const query = `INSERT INTO Conges (CongesDispo, DebutConges, FinConges) VALUES (?, ?, ?)`;
+    const params = [CONGES.NBCONGES, CONGES.DEBUTCONGES, CONGES.FINCONGES];
+    const query = `INSERT INTO CONGES (NBCONGES, DEBUTCONGES, FINCONGES) VALUES ( ?, ?, ?)`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -41,15 +41,10 @@ Leaves.postLeave = Conges => {
 };
 
 //UPDATE one Leave
-Leaves.updateLeave = (Conges, Id) => {
+Leaves.updateLeave = (CONGES, IDC) => {
   return new Promise((resolve, reject) => {
-    const params = [
-      Conges.CongesDispo,
-      Conges.DebutConges,
-      Conges.FinConges,
-      Id
-    ];
-    const query = `UPDATE Conges SET CongesDispo = ?, DebutConges = ?, FinConges = ? WHERE Id = ?`;
+    const params = [CONGES.NBCONGES, CONGES.DEBUTCONGES, CONGES.FINCONGES, IDC];
+    const query = `UPDATE CONGES SET NBCONGES = ?, DEBUTCONGES = ?, FINCONGES = ? WHERE IDC = ?;`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -60,9 +55,9 @@ Leaves.updateLeave = (Conges, Id) => {
 };
 
 //DELETE one Leave
-Leaves.deleteLeave = Id => {
+Leaves.deleteLeave = IDC => {
   return new Promise((resolve, reject) => {
-    conn.query(`DELETE FROM Conges WHERE Id = ?`, [Id], (err, res) => {
+    conn.query(`DELETE FROM CONGES WHERE IDC = ?`, [IDC], (err, res) => {
       if (err) {
         return reject(err);
       }
