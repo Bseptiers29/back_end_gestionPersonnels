@@ -5,7 +5,7 @@ let Staff = {};
 //GET all Staffs
 Staff.allStaffs = () => {
   return new Promise((resolve, reject) => {
-    conn.query(`SELECT * FROM Personnel ORDER BY NOM`, (err, res) => {
+    conn.query(`SELECT * FROM Personnel ORDER BY Nom`, (err, res) => {
       if (err) {
         return reject(err);
       }
@@ -15,9 +15,9 @@ Staff.allStaffs = () => {
 };
 
 //GET one Staff
-Staff.oneStaff = ID => {
+Staff.oneStaff = Id => {
   return new Promise((resolve, reject) => {
-    conn.query(`SELECT * FROM Personnel WHERE ID = ?`, [ID], (err, res) => {
+    conn.query(`SELECT * FROM Personnel WHERE Id = ?`, [Id], (err, res) => {
       if (err) {
         return reject(err);
       }
@@ -32,7 +32,7 @@ Staff.postStaff = Personnel => {
     const params = [
       Personnel.Prenom,
       Personnel.Nom,
-      Personnel.Securitesociale,
+      Personnel.SecuriteSociale,
       Personnel.Anciennete,
       Personnel.Date_naissance,
       Personnel.Email,
@@ -42,24 +42,23 @@ Staff.postStaff = Personnel => {
       Personnel.Service,
       Personnel.Image
     ];
-    const query =
-      "INSERT INTO `Personnel` (`ID`, `Prenom`, `Nom`, `Securitesociale`, `Anciennete`, `Date_naissance`, `Email`, `Adresse`, `Telephone`, `Profession`, `Service`, `Image`) VALUES (NULL, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?);";
+    const query = `INSERT INTO Personnel (Prenom, Nom, SecuriteSociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, Image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
       }
-      resolve(res);
+      return resolve(res);
     });
   });
 };
 
 //UPDATE one Staff
-Staff.updateStaff = (Personnel, ID) => {
+Staff.updateStaff = (Personnel, Id) => {
   return new Promise((resolve, reject) => {
     const params = [
       Personnel.Prenom,
       Personnel.Nom,
-      Personnel.Securitesociale,
+      Personnel.SecuriteSociale,
       Personnel.Anciennete,
       Personnel.Date_naissance,
       Personnel.Email,
@@ -68,9 +67,9 @@ Staff.updateStaff = (Personnel, ID) => {
       Personnel.Profession,
       Personnel.Service,
       Personnel.Image,
-      ID
+      Id
     ];
-    const query = `UPDATE Personnel SET Prenom = ?, Nom = ?, Securitesociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, Image = ? WHERE ID = ?`;
+    const query = `UPDATE Personnel SET Prenom = ?, Nom = ?, SecuriteSociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, Image = ? WHERE Id = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -81,9 +80,9 @@ Staff.updateStaff = (Personnel, ID) => {
 };
 
 //DELETE one Staff
-Staff.deleteStaff = ID => {
+Staff.deleteStaff = Id => {
   return new Promise((resolve, reject) => {
-    conn.query(`DELETE FROM Personnel WHERE ID = ?`, [ID], (err, res) => {
+    conn.query(`DELETE FROM Personnel WHERE Id = ?`, [Id], (err, res) => {
       if (err) {
         return reject(err);
       }
