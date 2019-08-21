@@ -1,9 +1,9 @@
 const routerStaffs = require("express").Router();
 const db = require("../controllers/staffs");
 
-//Routes for the "Personnel" table
+//Roads for the "Personnel" table
 
-//Route for all Staffs
+//Road for all Staffs
 routerStaffs.get("/personnels", async (req, res) => {
   try {
     let results = await db.allStaffs();
@@ -14,7 +14,18 @@ routerStaffs.get("/personnels", async (req, res) => {
   }
 });
 
-//Route for one Staff
+//Road for a staff and his leaves
+routerStaffs.get("/personnels_conges/:Id", async (req, res) => {
+  try {
+    let results = await db.oneStaffLeaves(req.params.Id);
+    res.json(results);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
+//Road for one Staff
 routerStaffs.get("/personnels/:Id", async (req, res) => {
   try {
     let results = await db.oneStaff(req.params.Id);
@@ -25,7 +36,7 @@ routerStaffs.get("/personnels/:Id", async (req, res) => {
   }
 });
 
-//Route for create one Staff
+//Road for create one Staff
 routerStaffs.post("/personnels", async (req, res) => {
   try {
     const staff = req.body;
@@ -37,7 +48,7 @@ routerStaffs.post("/personnels", async (req, res) => {
   }
 });
 
-//Route for update one Staff
+//Road for update one Staff
 routerStaffs.put("/personnels/:Id", async (req, res) => {
   try {
     const staff = req.body;
@@ -49,7 +60,7 @@ routerStaffs.put("/personnels/:Id", async (req, res) => {
   }
 });
 
-//Route for delete one Staff
+//Road for delete one Staff
 routerStaffs.delete("/personnels/:Id", async (req, res) => {
   try {
     let results = await db.deleteStaff(req.params.Id);

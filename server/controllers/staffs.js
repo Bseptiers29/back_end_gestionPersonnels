@@ -14,6 +14,22 @@ Staff.allStaffs = () => {
   });
 };
 
+//GET one Staff & Leaves
+Staff.oneStaffLeaves = Id => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      `SELECT * FROM Personnel, Conges WHERE Personnel.Id = Conges.ID_Personnel AND Id = ?`,
+      [Id],
+      (err, res) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(res[0]);
+      }
+    );
+  });
+};
+
 //GET one Staff
 Staff.oneStaff = Id => {
   return new Promise((resolve, reject) => {
