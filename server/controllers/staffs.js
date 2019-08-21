@@ -14,27 +14,11 @@ Staff.allStaffs = () => {
   });
 };
 
-//GET one Staff &  one Leave
-Staff.oneStaffLeave = Id => {
-  return new Promise((resolve, reject) => {
-    conn.query(
-      ` SELECT c.*, p.* FROM Conges c, Personnel p WHERE c.ID_Personnel = p.Id AND c.ID_Personnel = ?`,
-      [Id],
-      (err, res) => {
-        if (err) {
-          return reject(err);
-        }
-        return resolve(res[0]);
-      }
-    );
-  });
-};
-
 //GET one Staff & Leaves
 Staff.oneStaffLeaves = Id => {
   return new Promise((resolve, reject) => {
     conn.query(
-      ` SELECT c.*, p.* FROM Conges c, Personnel p WHERE c.ID_Personnel = p.Id AND c.ID_Personnel = ?`,
+      ` SELECT c.* FROM Conges c, Personnel p WHERE c.ID_Personnel = p.Id AND c.ID_Personnel = ? ORDER BY DebutConges;`,
       [Id],
       (err, res) => {
         if (err) {
