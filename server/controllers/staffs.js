@@ -18,7 +18,7 @@ Staff.allStaffs = () => {
 Staff.oneStaffLeaves = Id => {
   return new Promise((resolve, reject) => {
     conn.query(
-      `SELECT * FROM Conges, Personnel WHERE Conges.ID_Personnel = Personnel.Id`,
+      ` SELECT c.*, p.Prenom, p.Nom, p.Anciennete, p.Profession, p.Service FROM Conges c, Personnel p WHERE c.ID_Personnel = p.Id AND c.ID_Personnel = ?`,
       [Id],
       (err, res) => {
         if (err) {
@@ -29,7 +29,7 @@ Staff.oneStaffLeaves = Id => {
     );
   });
 };
-//SELECT c.*, p.Prenom, p.Nom, p.Anciennete, p.Profession, p.Service FROM Conges c, Personnel p WHERE c.ID_Personnel = p.Id AND c.ID_Personnel = ?
+
 //GET one Staff
 Staff.oneStaff = Id => {
   return new Promise((resolve, reject) => {
