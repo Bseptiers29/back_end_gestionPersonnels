@@ -24,7 +24,7 @@ Leaves.oneLeave = Id_Personnel => {
         if (err) {
           return reject(err);
         }
-        return resolve(res[0]);
+        return resolve(res);
       }
     );
   });
