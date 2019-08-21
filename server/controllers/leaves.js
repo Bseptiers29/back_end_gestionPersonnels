@@ -33,12 +33,7 @@ Leaves.oneLeave = Id_Personnel => {
 //POST new Leave
 Leaves.postLeave = Conges => {
   return new Promise((resolve, reject) => {
-    const params = [
-      Conges.CongesDispo,
-      Conges.DebutConges,
-      Conges.FinConges,
-      Conges.ID_Personnel
-    ];
+    const params = [Conges.DebutConges, Conges.FinConges, Conges.ID_Personnel];
     const query = `INSERT INTO Conges (DebutConges, FinConges, ID_Personnel) VALUES (?, ?, ?, ?)`;
     conn.query(query, params, (err, res) => {
       if (err) {
@@ -53,7 +48,6 @@ Leaves.postLeave = Conges => {
 Leaves.updateLeave = (Conges, Idc) => {
   return new Promise((resolve, reject) => {
     const params = [
-      Conges.CongesDispo,
       Conges.DebutConges,
       Conges.FinConges,
       Conges.ID_Personnel,
