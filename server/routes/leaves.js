@@ -14,9 +14,9 @@ routerLeave.get("/conges", async (req, res) => {
 });
 
 //Road for one Leave
-routerLeave.get("/conges/:Idc", async (req, res) => {
+routerLeave.get("/conges/:Id_Personnel", async (req, res) => {
   try {
-    let results = await db.oneLeave(req.params.Idc);
+    let results = await db.oneLeave(req.params.Id_Personnel);
     res.json(results);
   } catch (e) {
     console.log(e);

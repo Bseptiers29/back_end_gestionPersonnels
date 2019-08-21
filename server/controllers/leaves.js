@@ -15,14 +15,18 @@ Leaves.allLeaves = () => {
 };
 
 //GET one Leave
-Leaves.oneLeave = Idc => {
+Leaves.oneLeave = Id_Personnel => {
   return new Promise((resolve, reject) => {
-    conn.query(`SELECT * FROM Conges WHERE Idc = ?`, [Idc], (err, res) => {
-      if (err) {
-        return reject(err);
+    conn.query(
+      `SELECT * FROM Conges WHERE Id_Personnel = ?`,
+      [Id_Personnel],
+      (err, res) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(res[0]);
       }
-      return resolve(res[0]);
-    });
+    );
   });
 };
 
