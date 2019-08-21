@@ -14,6 +14,17 @@ routerStaffs.get("/personnels", async (req, res) => {
   }
 });
 
+//Road for a staff and one leave
+routerStaffs.get("/personnel_conge/:Id", async (req, res) => {
+  try {
+    let results = await db.oneStaffLeave(req.params.Id);
+    res.json(results);
+  } catch (e) {
+    console.log(e);
+    res.sendStatus(500);
+  }
+});
+
 //Road for a staff and his leaves
 routerStaffs.get("/personnels_conges/:Id", async (req, res) => {
   try {
