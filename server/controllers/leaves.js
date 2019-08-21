@@ -39,7 +39,7 @@ Leaves.postLeave = Conges => {
       Conges.FinConges,
       Conges.ID_Personnel
     ];
-    const query = `INSERT INTO Conges (CongesDispo, DebutConges, FinConges, ID_Personnel) VALUES (?, ?, ?, ?)`;
+    const query = `INSERT INTO Conges (DebutConges, FinConges, ID_Personnel) VALUES (?, ?, ?, ?)`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -59,7 +59,7 @@ Leaves.updateLeave = (Conges, Idc) => {
       Conges.ID_Personnel,
       Idc
     ];
-    const query = `UPDATE Conges SET CongesDispo = ?, DebutConges = ?, FinConges = ?, ID_Personnel = ? WHERE Idc = ?`;
+    const query = `UPDATE Conges SET DebutConges = ?, FinConges = ?, ID_Personnel = ? WHERE Idc = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);

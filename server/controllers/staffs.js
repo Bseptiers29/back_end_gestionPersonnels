@@ -56,9 +56,10 @@ Staff.postStaff = Personnel => {
       Personnel.Telephone,
       Personnel.Profession,
       Personnel.Service,
+      Personnel.CongesDispo,
       Personnel.Image
     ];
-    const query = `INSERT INTO Personnel (Prenom, Nom, SecuriteSociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, Image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
+    const query = `INSERT INTO Personnel (Prenom, Nom, SecuriteSociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, CongesDispo, Image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -82,10 +83,11 @@ Staff.updateStaff = (Personnel, Id) => {
       Personnel.Telephone,
       Personnel.Profession,
       Personnel.Service,
+      Personnel.CongesDispo,
       Personnel.Image,
       Id
     ];
-    const query = `UPDATE Personnel SET Prenom = ?, Nom = ?, SecuriteSociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, Image = ? WHERE Id = ?`;
+    const query = `UPDATE Personnel SET Prenom = ?, Nom = ?, SecuriteSociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, CongesDispo = ? Image = ? WHERE Id = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
