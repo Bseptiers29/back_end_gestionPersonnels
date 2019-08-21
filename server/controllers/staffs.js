@@ -18,7 +18,7 @@ Staff.allStaffs = () => {
 Staff.oneStaffLeaves = Id => {
   return new Promise((resolve, reject) => {
     conn.query(
-      ` SELECT c.*, p.Prenom, p.Nom, p.Anciennete, p.Profession, p.Service FROM Conges c, Personnel p WHERE c.ID_Personnel = p.Id AND c.ID_Personnel = ?`,
+      ` SELECT c.*, p.Prenom, p.Nom, p.Anciennete, p.Profession, p.Service, p.Image, p.CongesDispo FROM Conges c, Personnel p WHERE c.ID_Personnel = p.Id AND c.ID_Personnel = ?`,
       [Id],
       (err, res) => {
         if (err) {
@@ -87,7 +87,7 @@ Staff.updateStaff = (Personnel, Id) => {
       Personnel.Image,
       Id
     ];
-    const query = `UPDATE Personnel SET Prenom = ?, Nom = ?, SecuriteSociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, CongesDispo = ? Image = ? WHERE Id = ?`;
+    const query = `UPDATE Personnel SET Prenom = ?, Nom = ?, SecuriteSociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, CongesDispo = ?, Image = ? WHERE Id = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
