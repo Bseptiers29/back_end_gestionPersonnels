@@ -2,13 +2,30 @@ const express = require("express");
 const cors = require("cors");
 const bodyParser = require("body-parser");
 var multer = require("multer");
-
+var path = require("path");
 const routes = require("./routes");
 
 const app = express();
 
-var fs = require("fs");
-var path = require("path");
+var storage = multer.diskStorage({
+  destination: function(req, file, cb) {
+    cb(null, "./uploads");
+  },
+  filename: function(req, file, cb) {
+    cb(null, file.originalname);
+  }
+});
+
+var upload = multer({
+  storage: storage,
+  fileFilter: function(req, file, callback) {
+    var ext = path.extname(file.originalname);
+    if (ext !== ".png" && ext !== ".jpg" && ext !== ".gif" && ext !== ".jpeg") {
+      return callback(new Error("Seul les formats images sont acceptés"));
+    }
+    callback(null, true);
+  }
+});
 
 app.use(cors());
 
@@ -23,50 +40,16 @@ app.get("/", function(req, res) {
   );
 });
 
-app.get("/images", function(req, res) {
-  res.sendFile(__dirname + "/tmp");
-});
-
-var storage = multer.diskStorage({
-  destination: function(req, file, callback) {
-    fs.mkdir("../static", function(err) {
-      if (err) {
-        console.log(err.stack);
-      } else {
-        callback(null, "../static");
-      }
-    });
-  },
-  filename: function(req, file, callback) {
-    callback(
-      null,
-      file.fieldname + "-" + Date.now() + path.extname(file.originalname)
-    );
+app.post("/files", upload.array("profiles", 4), (req, res) => {
+  try {
+    res.send(req.file);
+  } catch (err) {
+    res.send(400);
   }
 });
 
-app.post("/files", function(req, res) {
-  var upload = multer({
-    storage: storage,
-    fileFilter: function(req, file, callback) {
-      var ext = path.extname(file.originalname);
-      if (
-        ext !== ".png" &&
-        ext !== ".jpg" &&
-        ext !== ".gif" &&
-        ext !== ".jpeg"
-      ) {
-        return callback(new Error("Only images are allowed"));
-      }
-      callback(null, true);
-    }
-  }).single("userFile");
-  upload(req, res, function(err) {
-    if (err) {
-      return res.end("Error uploading file.");
-    }
-    res.end("File is uploaded");
-  });
+app.get("/", function(req, res) {
+  res.sendFile(__dirname + "/uploads");
 });
 
 app.listen(process.env.PORT || "3000", () => {
