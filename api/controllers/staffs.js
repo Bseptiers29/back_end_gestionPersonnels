@@ -61,7 +61,7 @@ Staff.postStaff = Personnel => {
     ];
     const query =
       `INSERT INTO Personnel (Prenom, Nom, SecuriteSociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, CongesDispo, Image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ` +
-      __filename +
+      req.file.filename +
       `)`;
     console.log(__filename);
     conn.query(query, params, (err, res) => {
