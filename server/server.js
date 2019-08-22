@@ -48,7 +48,7 @@ app.post("/files", upload.array("profiles", 4), (req, res) => {
   }
 });
 
-app.get("/", function(req, res) {
+app.get("/files", function(req, res) {
   res.sendFile(__dirname + "/uploads");
 });
 
