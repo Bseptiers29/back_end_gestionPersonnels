@@ -49,7 +49,9 @@ app.post("/files", upload.array("profiles", 4), (req, res) => {
 });
 
 app.get("/files", function(req, res) {
-  res.sendFile(__dirname + "/uploads");
+  res.sendFile(
+    "/home/bas/app_c7edeb26-e069-443f-8987-b321e80adc7b/" + "/uploads"
+  );
 });
 
 app.listen(process.env.PORT || "3000", () => {
