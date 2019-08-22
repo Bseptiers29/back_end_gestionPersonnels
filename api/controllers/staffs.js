@@ -59,10 +59,7 @@ Staff.postStaff = Personnel => {
       Personnel.CongesDispo,
       Personnel.Image
     ];
-    const query =
-      `INSERT INTO Personnel (Prenom, Nom, SecuriteSociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, CongesDispo, Image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ` +
-      req.file.filename +
-      `)`;
+    const query = `INSERT INTO Personnel (Prenom, Nom, SecuriteSociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, CongesDispo, Image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
     console.log(__filename);
     conn.query(query, params, (err, res) => {
       if (err) {

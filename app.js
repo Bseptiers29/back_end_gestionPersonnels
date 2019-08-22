@@ -38,14 +38,7 @@ var storage = multer.diskStorage({
   },
   filename: function(req, file, cb) {
     console.log("in filename");
-    cb(
-      null,
-      slugify(file.originalname, {
-        lower: true,
-        replacement: "-",
-        remove: /[*+~()'"!:@?]/
-      })
-    );
+    cb(null, file.originalname);
   }
 });
 
