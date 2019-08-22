@@ -4,6 +4,8 @@ const cors = require("cors");
 const bodyParser = require("body-parser");
 var multer = require("multer");
 var path = require("path");
+const { existsSync, mkdirSync } = require("fs");
+const slugify = require("slugify");
 
 //Import de toutes les routes
 const routes = require("./api/routes");
@@ -20,9 +22,6 @@ app.use(bodyParser.urlencoded({ extended: true }));
 //Utilisation des routes
 app.use("/v1", routes);
 
-//Declaration du dossier uploads comme dossier statique
-app.use("api/uploads", express.static("uploads"));
-
 //Page d'acceuil de l'API
 app.get("/", function(req, res) {
   res.send(
@@ -32,13 +31,21 @@ app.get("/", function(req, res) {
 
 //MULTER
 
-//Stockage pour les images
+//Stockage pour les images (et seulement les images)
 var storage = multer.diskStorage({
   destination: function(req, file, cb) {
-    cb(null, "api/uploads");
+    cb(null, path.join(__dirname, "files", "images"));
   },
   filename: function(req, file, cb) {
-    cb(null, file.originalname);
+    console.log("in filename");
+    cb(
+      null,
+      slugify(file.originalname, {
+        lower: true,
+        replacement: "-",
+        remove: /[*+~()'"!:@?]/
+      })
+    );
   }
 });
 
@@ -52,28 +59,36 @@ var upload = multer({
     var ext = path.extname(file.originalname);
     if (ext !== ".png" && ext !== ".jpg" && ext !== ".gif" && ext !== ".jpeg") {
       return callback(
-        new Error("Seul les formats 'png','jpg','gif','jpeg' sont acceptés")
+        new Error("Seuls les formats 'png','jpg','gif' et 'jpeg' sont acceptés")
       );
     }
     callback(null, true);
   }
 });
 
+// S'assurer que le dossier images existe
+const filesPath = path.join(__dirname, "files");
+if (!existsSync(filesPath)) {
+  mkdirSync(filesPath);
+  mkdirSync(path.join(filesPath, "images"));
+} else if (!existsSync(path.join(filesPath, "images"))) {
+  mkdirSync(path.join(filesPath, "images"));
+}
+
 //Requete POST pour les images
 app.post("/files", upload.single("profiles"), (req, res) => {
-  console.log(req.file);
+  console.log(req.file, req.files);
   try {
-    res.send(req.file);
+    res.json({
+      ok: true,
+      url: `${req.baseUrl}/images/${req.file.filename}`
+    });
   } catch (err) {
     res.send(400);
   }
 });
 
-//Requete GET pour les images
-app.get("/file", function(req, res) {
-  res.sendFile(
-    "/home/bas/app_c7edeb26-e069-443f-8987-b321e80adc7b/api" + "/uploads"
-  );
-});
+//Declaration du dossier d'uploads comme dossier statique
+app.use(express.static(path.join(__dirname, "files")));
 
 module.exports = app;
