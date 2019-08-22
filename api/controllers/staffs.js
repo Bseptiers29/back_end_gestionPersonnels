@@ -60,7 +60,6 @@ Staff.postStaff = Personnel => {
       Personnel.Image
     ];
     const query = `INSERT INTO Personnel (Prenom, Nom, SecuriteSociale, Anciennete, Date_naissance, Email, Adresse, Telephone, Profession, Service, CongesDispo, Image) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)`;
-    console.log(__filename);
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
@@ -88,9 +87,7 @@ Staff.updateStaff = (Personnel, Id) => {
       Personnel.Image,
       Id
     ];
-    const query =
-      `UPDATE Personnel SET Prenom = ?, Nom = ?, SecuriteSociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, CongesDispo = ?, Image = ` +
-      __filename` WHERE Id = ?`;
+    const query = `UPDATE Personnel SET Prenom = ?, Nom = ?, SecuriteSociale = ?, Anciennete = ?, Date_naissance = ?, Email = ?, Adresse = ?, Telephone = ?, Profession = ?, Service = ?, CongesDispo = ?, Image = ? WHERE Id = ?`;
     conn.query(query, params, (err, res) => {
       if (err) {
         return reject(err);
