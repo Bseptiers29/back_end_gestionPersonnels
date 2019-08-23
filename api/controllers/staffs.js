@@ -18,7 +18,7 @@ Staff.allStaffs = () => {
 Staff.oneStaffLeaves = Id => {
   return new Promise((resolve, reject) => {
     conn.query(
-      ` SELECT c.* FROM Conges c, Personnel p WHERE c.ID_Personnel = p.Id AND c.ID_Personnel = ? ORDER BY DebutConges;`,
+      "SELECT c.* FROM Conges c, Personnel p WHERE c.ID_Personnel = p.Id AND c.ID_Personnel = ? ORDER BY `c`.`DebutConges` DESC",
       [Id],
       (err, res) => {
         if (err) {
