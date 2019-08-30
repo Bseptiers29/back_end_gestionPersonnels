@@ -5,7 +5,6 @@ const bodyParser = require("body-parser");
 var multer = require("multer");
 var path = require("path");
 const { existsSync, mkdirSync } = require("fs");
-const slugify = require("slugify");
 
 //Import de toutes les routes
 const routes = require("./api/routes");
