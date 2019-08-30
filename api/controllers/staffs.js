@@ -15,6 +15,21 @@ Staff.allStaffs = () => {
 };
 
 //GET one Staff & Leaves
+Staff.allStaffLeaves = () => {
+  return new Promise((resolve, reject) => {
+    conn.query(
+      "SELECT DISTINCT c.*, p.Nom FROM Conges c ,Personnel p WHERE c.ID_Personnel = p.Id ORDER BY `p`.`Nom` ASC",
+      (err, res) => {
+        if (err) {
+          return reject(err);
+        }
+        return resolve(res);
+      }
+    );
+  });
+};
+
+//GET one Staff & Leaves
 Staff.oneStaffLeaves = Id => {
   return new Promise((resolve, reject) => {
     conn.query(
