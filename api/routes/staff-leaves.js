@@ -1,5 +1,5 @@
 const routerStaffLeaves = require("express").Router();
-const db = require("../controllers/leaves");
+const db = require("../controllers/staff-leaves");
 //Roads for the joint "Personnel with Conges" tables
 
 //Road for all staffs and leaves
